@@ -25,8 +25,8 @@ Mqtt() throws MqttException {
    // client = new MqttClient("tcp://m15.cloudmqtt.com:19041", "erpswmon");
     
     String host  = "tcp://m15.cloudmqtt.com:19041";
-    String username = "erpswmon";
-    String password = "ku5X6wIwkxBC";
+    String username = "erpswmonabc";
+    String password = "ku5X6wIwkxBCpqp";
     String clientId = "MQTT-Java-Example";
     
 

@@ -66,9 +66,7 @@ public class MainController implements Initializable {
 	}
 	
 	public void btn1(ActionEvent event) {
-		int a;
-		a = 1; 
-		 // change LoginScene.fxml so it now has fx:controller="LoginController"
+		// change LoginScene.fxml so it now has fx:controller="LoginController"
         Parent root;
 		try {
 			lePropriedades();
