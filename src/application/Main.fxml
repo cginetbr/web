@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="120.0" minWidth="100.0" prefHeight="391.0" prefWidth="303.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+   <children>
+      <Button fx:id="iniciar" layoutX="223.0" layoutY="344.0" mnemonicParsing="false" onAction="#btn1" text="Iniciar" />
+      <Pane layoutX="10.0" layoutY="14.0" prefHeight="323.0" prefWidth="283.0" style="-fx-background-color: #ffff1;">
+         <children>
+            <Button layoutX="111.0" layoutY="296.0" mnemonicParsing="false" onAction="#btnSalvar" text="Salvar" />
+            <TextField layoutX="13.0" layoutY="126.0" prefHeight="27.0" prefWidth="84.0" fx:id="x" />
+            <Label layoutX="13.0" layoutY="109.0" text="Posicao X" />
+            <Label layoutX="14.0" layoutY="165.0" text="ID Dispositivo" />
+            <TextField fx:id="altura" layoutX="14.0" layoutY="64.0" prefHeight="27.0" prefWidth="84.0" />
+            <TextField fx:id="largura" layoutX="127.0" layoutY="64.0" prefHeight="27.0" prefWidth="84.0" />
+            <Label layoutX="127.0" layoutY="47.0" text="Largura" />
+            <Label layoutX="14.0" layoutY="47.0" text="Altura" />
+            <TextField fx:id="id" layoutX="15.0" layoutY="187.0" />
+            <Label layoutX="127.0" layoutY="109.0" text="Posicao Y" />
+            <TextField fx:id="y" layoutX="127.0" layoutY="126.0" prefHeight="27.0" prefWidth="84.0" />
+            <TextField fx:id="servidor" layoutX="15.0" layoutY="247.0" />
+            <Label layoutX="14.0" layoutY="225.0" text="Servidor" />
+            <TextField fx:id="porta" layoutX="187.0" layoutY="247.0" prefHeight="27.0" prefWidth="84.0" />
+            <Label layoutX="187.0" layoutY="230.0" text="Porta" />
+         </children>
+      </Pane>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" top="10.0" />
+   </padding>
+</AnchorPane>
