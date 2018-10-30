@@ -19,9 +19,7 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Console");
 			primaryStage.show();
-			
-		//	this.stage.setScene(scene);
-			 
+					 
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

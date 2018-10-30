@@ -13,8 +13,7 @@ public class Mqtt implements MqttCallback {
 	private final int qos = 1;
 	private String topic = "passagem";
 	
-	
-private static Mqtt INSTANCE;
+	private static Mqtt INSTANCE;
 
 MqttClient client;
 //String ipPatchPanel;
@@ -25,8 +24,8 @@ Mqtt() throws MqttException {
    // client = new MqttClient("tcp://m15.cloudmqtt.com:19041", "erpswmon");
     
     String host  = "tcp://m15.cloudmqtt.com:19041";
-    String username = "erpswmonabc";
-    String password = "ku5X6wIwkxBCpqp";
+    String username = "erpswmon";
+    String password = "ku5X6wIwkxBCp";
     String clientId = "MQTT-Java-Example";
     
 
@@ -38,16 +37,12 @@ Mqtt() throws MqttException {
     client = new MqttClient(host, clientId, new MemoryPersistence());
     client.setCallback(this);
     client.connect(conOpt);
-    
-    
-    client.subscribe(this.topic, qos);
-    
    
+    client.subscribe(this.topic, qos);
     
 }
 
 public void posta(String txt) {
-	
 	
 	
 	MqttMessage message = new MqttMessage();
@@ -94,7 +89,10 @@ public void connectionLost(Throwable cause) {
 @Override
 public void messageArrived(String topic, MqttMessage message) throws Exception {
     System.out.println(message);
+ 
 }
+
+ 
 
 @Override
 public void deliveryComplete(IMqttDeliveryToken token) {

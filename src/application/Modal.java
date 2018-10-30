@@ -14,22 +14,33 @@ public class Modal implements Initializable {
 	private WebEngine engine;
 	
  
-
 	@Override
 	public void initialize(java.net.URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		
+		
 		engine = webview.getEngine();
 		engine.load("http://www.conectcar.com");
-		 
-		
+
+				
 	}
 	
 	public void btn1(ActionEvent event) {
-		
-		
+				
 		engine.load("http://www.conectcar.com");
 		 
 	}
+	
+	
+	public WebEngine getWebview() {
+		
+		return this.engine;
+		
+	}
+	
+	
+	
+	
 	
 	
 }
