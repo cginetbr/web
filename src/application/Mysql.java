@@ -21,8 +21,7 @@ public class Mysql {
  
              Mysql() {
  
-    }
- 
+    } 
   
    public ResultSet select(String sql) throws SQLException {
 	   	   
