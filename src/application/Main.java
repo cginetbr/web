@@ -1,6 +1,9 @@
 package application;
 	
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -34,6 +37,14 @@ public class Main extends Application {
 	    this.stage.setWidth(1800);
 	    this.stage.setHeight(1200);
 	}
+	
+	
+	@FXML
+    public void exitApplication(ActionEvent event) {
+        System.out.println("stop");
+    
+        Platform.exit();
+    }
 	
 	
 }

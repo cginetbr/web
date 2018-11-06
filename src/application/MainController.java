@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import org.eclipse.paho.client.mqttv3.MqttException;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,7 @@ import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 public class MainController implements Initializable {
 
@@ -83,7 +85,7 @@ public class MainController implements Initializable {
 	        primaryStage.setX(Integer.parseInt(px));
 	        primaryStage.setY(Integer.parseInt(py));
 	        primaryStage.initStyle(StageStyle.UNDECORATED);
-	        primaryStage.show();
+	      
 	                
 	        for (Screen screen : Screen.getScreens()) {
 	           
@@ -92,7 +94,13 @@ public class MainController implements Initializable {
 	            
 	        }
              
-	        buscaMensam();
+	      
+	        primaryStage.setOnCloseRequest((WindowEvent event1) -> {
+	        	 System.exit(0);
+	        });
+	        
+	        primaryStage.show();
+	      //  buscaMensam();
         
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -179,6 +187,14 @@ public class MainController implements Initializable {
 		
 		
 	}
+	
+	
+	@FXML
+    public void exitApplication(ActionEvent event) {
+        System.out.println("stop");
+    
+        Platform.exit();
+    }
 	
 	
 }
