@@ -1,4 +1,4 @@
-package application;
+package conectads;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,28 +34,30 @@ public class MainController implements Initializable {
 	@FXML private WebView webview;
 	Stage primaryStage;
 	Properties prop;
+	Properties propVideo;
 	@FXML TextField altura;
 	@FXML TextField largura;
 	@FXML TextField y;
 	@FXML TextField x;
-	@FXML TextField servidor;
-	@FXML TextField porta;
+	@FXML TextField servidorMqtt;
+	@FXML TextField portaMqtt;
 	@FXML TextField id;
+	@FXML TextField usuarioMqtt;
+	@FXML TextField senhaMqtt;
+	@FXML TextField servidorMysql;
+	@FXML TextField usuarioMysql;
+	@FXML TextField senhaMysql;
+	@FXML TextField portaMysql;
+	@FXML TextField nomePista;
+	@FXML TextField urlOrquestrador;
 	 
-	String larg ;
-	String px ;
-	String py ;
-	String serv ;
-	String port ;
-	String pid ;
-	String alt ;
-	String server;
 	
 	@Override 
 	public void initialize(java.net.URL location, ResourceBundle resources) {
 		
 		//webview.getEngine();
 		 prop = new Properties();
+		 propVideo = new Properties();
 		
 		 try {
 			lePropriedades();
@@ -63,27 +65,27 @@ public class MainController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			
-			
 	}
 	
 	public void btn1(ActionEvent event) {
 		// change LoginScene.fxml so it now has fx:controller="LoginController"
         Parent root;
 		try {
-			lePropriedades();
-		
-			primaryStage = new Stage();
-			root = FXMLLoader.load(getClass().getResource("/application/modal.fxml"));
 			
-	        Scene scene = new Scene(root, Integer.parseInt(larg), Integer.parseInt(alt));
-	      //  Scene scene = new Scene(root);
+			gravarVideo();
+			lePropriedades();
+			
+			primaryStage = new Stage();
+			root = FXMLLoader.load(getClass().getResource("/conectads/modal.fxml"));
+			
+	        Scene scene = new Scene(root, Integer.parseInt(largura.getText()), Integer.parseInt(altura.getText()));
+	      
 	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	        scene.setFill(Color.BLACK);
 	        primaryStage.setScene(scene);
 	        primaryStage.initModality(Modality.WINDOW_MODAL);
-	        primaryStage.setX(Integer.parseInt(px));
-	        primaryStage.setY(Integer.parseInt(py));
+	        primaryStage.setX(Integer.parseInt(x.getText()));
+	        primaryStage.setY(Integer.parseInt(y.getText()));
 	        primaryStage.initStyle(StageStyle.UNDECORATED);
 	      
 	                
@@ -93,8 +95,7 @@ public class MainController implements Initializable {
 	            primaryStage.setX(bounds.getMinX());
 	            
 	        }
-             
-	      
+          
 	        primaryStage.setOnCloseRequest((WindowEvent event1) -> {
 	        	 System.exit(0);
 	        });
@@ -111,25 +112,34 @@ public class MainController implements Initializable {
 		
 	}
 	
+ 
+	
+	
+	
 	public void btnSalvar(ActionEvent event) {
 		
-		alt = altura.getText();
-		larg = largura.getText();
-		px = x.getText();
-		py = y.getText();
-		server = servidor.getText();
-		port = porta.getText();
-		pid = id.getText();
-		
+	 
+		 
 		
 		//JOptionPane.showMessageDialog(null,"teste", "InfoBox: " + valor, JOptionPane.INFORMATION_MESSAGE);
-		prop.setProperty("altura", alt);
-		prop.setProperty("largura", larg);
-		prop.setProperty("x", px);
-		prop.setProperty("y", py);
-		prop.setProperty("servidor", server);
-		prop.setProperty("porta", port);
-		prop.setProperty("id", pid);
+ 
+		prop.setProperty("servidorMqtt", servidorMqtt.getText());
+		prop.setProperty("portaMqtt", portaMqtt.getText());
+		prop.setProperty("usuarioMqtt", usuarioMqtt.getText());
+		prop.setProperty("senhaMqtt", senhaMqtt.getText());
+		
+		
+		prop.setProperty("id", id.getText());
+		
+
+		prop.setProperty("nomePista", nomePista.getText());
+		prop.setProperty("servidorMysql", servidorMysql.getText());
+		prop.setProperty("portaMysql", portaMysql.getText());
+		prop.setProperty("usuarioMysql", usuarioMysql.getText());
+		prop.setProperty("senhaMysql", senhaMysql.getText());
+		
+		prop.setProperty("urlOrquestrador", urlOrquestrador.getText());
+		
 
 		try {
 			prop.store(new FileOutputStream("application.prop"),"Properties");
@@ -144,56 +154,79 @@ public class MainController implements Initializable {
 	}
 	
 	
-	public void lePropriedades() throws IOException {
-		
-		
-		InputStream in = getClass().getResourceAsStream("application.prop");
-		FileInputStream fi=new FileInputStream("application.prop");
-
-		prop.load(fi);
-		alt = prop.getProperty("altura");
-		
-		
-		larg = prop.getProperty("largura");
-		px = prop.getProperty("x");
-		py = prop.getProperty("y");
-		serv = prop.getProperty("servidor");
-		port = prop.getProperty("porta");
-		pid = prop.getProperty("id");
-				
-		altura.setText(alt);
-		largura.setText(larg);
-		x.setText(px);
-		y.setText(py);
-		servidor.setText(serv);
-		porta.setText(port);
-		id.setText(pid);
-		
-	}
 	
-	public void buscaMensam() {
-		
-		
+	public void gravarVideo() {
+				
+		//JOptionPane.showMessageDialog(null,"teste", "InfoBox: " + valor, JOptionPane.INFORMATION_MESSAGE);
+		prop.setProperty("altura", altura.getText());
+		prop.setProperty("largura", largura.getText());
+		prop.setProperty("x", x.getText());
+		prop.setProperty("y", y.getText());
+		 
 		try {
-			Mqtt m = new Mqtt();
-			m.posta("teste");
-			
-			
-			
-		} catch (MqttException e) {
+			prop.store(new FileOutputStream("application.prop"),"Properties");
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+ 
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
 		}
 		
 		
 	}
 	
 	
+	
+	public void lePropriedades() throws IOException {
+		
+		FileInputStream fi=new FileInputStream("application.prop");
+
+		prop.load(fi);
+		
+		altura.setText(prop.getProperty("altura"));
+		largura.setText(prop.getProperty("largura"));
+		x.setText(prop.getProperty("x"));
+		y.setText(prop.getProperty("y"));
+		servidorMqtt.setText(prop.getProperty("servidorMqtt"));
+		portaMqtt.setText(prop.getProperty("portaMqtt"));
+		id.setText(prop.getProperty("id"));
+		
+		usuarioMqtt.setText(prop.getProperty("usuarioMqtt"));
+		senhaMqtt.setText(prop.getProperty("senhaMqtt"));
+		
+		servidorMysql.setText(prop.getProperty("servidorMysql"));
+		usuarioMysql.setText(prop.getProperty("usuarioMysql"));
+		senhaMysql.setText(prop.getProperty("senhaMysql"));
+		portaMysql.setText(prop.getProperty("portaMysql"));
+ 		nomePista.setText(prop.getProperty("nomePista"));
+ 		urlOrquestrador.setText(prop.getProperty("urlOrquestrador"));
+		
+		
+	}
+	 	
+	public void buscaMensam() {
+		
+		
+		try {
+			Mqtt m = new Mqtt();
+			m.posta("teste");			
+		} catch (MqttException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}	
+	
 	@FXML
     public void exitApplication(ActionEvent event) {
         System.out.println("stop");
-    
-        Platform.exit();
+        System.exit(0);
+       // Platform.exit();
     }
 	
 	

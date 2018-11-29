@@ -1,4 +1,4 @@
-package application;
+package conectads;
 	
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -15,7 +15,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 	  
-			Parent root = FXMLLoader.load(getClass().getResource("/application/Main.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/conectads/Main.fxml"));
 			//Scene scene = new Scene(root,1024,800);
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -23,6 +23,13 @@ public class Main extends Application {
 			primaryStage.setTitle("Console");
 			primaryStage.show();
 					 
+			primaryStage.setOnCloseRequest(event -> {
+			    System.out.println("Stage is closing");
+			    System.out.println("stop");
+		        System.exit(0);
+			});
+			
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -45,6 +52,8 @@ public class Main extends Application {
     
         Platform.exit();
     }
+	
+ 
 	
 	
 }

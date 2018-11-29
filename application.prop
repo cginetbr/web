@@ -1,9 +1,21 @@
 #Properties
-#Tue Nov 06 00:06:55 BRST 2018
-x=0
-largura=300
-porta=3232
-id=321312
+#Thu Nov 29 19:47:53 BRST 2018
+largura=500
+portaMqtt=1883
 servidor=323232
-y=0
+porta=3232
+usuarioMqtt=conectcar
+usuarioMysql=conectcar
+nomePista=stream
 altura=600
+userMqtt=usuario
+passMqtt=1833
+y=0
+x=0
+urlOrquestrador=http\://192.168.8.115/post/campanha.php
+servidorMqtt=192.168.8.115
+id=ENTRADA1
+senhaMqtt=toor
+portaMysql=3306
+servidorMysql=192.168.8.115
+senhaMysql=55Mudaca
