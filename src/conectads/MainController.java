@@ -33,8 +33,7 @@ public class MainController implements Initializable {
 
 	@FXML private WebView webview;
 	Stage primaryStage;
-	Properties prop;
-	Properties propVideo;
+	Parametros parm;
 	@FXML TextField altura;
 	@FXML TextField largura;
 	@FXML TextField y;
@@ -55,9 +54,8 @@ public class MainController implements Initializable {
 	@Override 
 	public void initialize(java.net.URL location, ResourceBundle resources) {
 		
-		//webview.getEngine();
-		 prop = new Properties();
-		 propVideo = new Properties();
+		 
+		 parm = new Parametros();
 		
 		 try {
 			lePropriedades();
@@ -123,33 +121,26 @@ public class MainController implements Initializable {
 		
 		//JOptionPane.showMessageDialog(null,"teste", "InfoBox: " + valor, JOptionPane.INFORMATION_MESSAGE);
  
-		prop.setProperty("servidorMqtt", servidorMqtt.getText());
-		prop.setProperty("portaMqtt", portaMqtt.getText());
-		prop.setProperty("usuarioMqtt", usuarioMqtt.getText());
-		prop.setProperty("senhaMqtt", senhaMqtt.getText());
+		parm.SetParametro("servidorMqtt", servidorMqtt.getText());
+		parm.SetParametro("portaMqtt", portaMqtt.getText());
+		parm.SetParametro("usuarioMqtt", usuarioMqtt.getText());
+		parm.SetParametro("senhaMqtt", senhaMqtt.getText());
 		
 		
-		prop.setProperty("id", id.getText());
-		
-
-		prop.setProperty("nomePista", nomePista.getText());
-		prop.setProperty("servidorMysql", servidorMysql.getText());
-		prop.setProperty("portaMysql", portaMysql.getText());
-		prop.setProperty("usuarioMysql", usuarioMysql.getText());
-		prop.setProperty("senhaMysql", senhaMysql.getText());
-		
-		prop.setProperty("urlOrquestrador", urlOrquestrador.getText());
+		parm.SetParametro("id", id.getText());
 		
 
-		try {
-			prop.store(new FileOutputStream("application.prop"),"Properties");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		parm.SetParametro("nomePista", nomePista.getText());
+		parm.SetParametro("servidorMysql", servidorMysql.getText());
+		parm.SetParametro("portaMysql", portaMysql.getText());
+		parm.SetParametro("usuarioMysql", usuarioMysql.getText());
+		parm.SetParametro("senhaMysql", senhaMysql.getText());
+		
+		parm.SetParametro("urlOrquestrador", urlOrquestrador.getText());
+		
+		parm.salvar();
+
+		 
 		
 	}
 	
@@ -158,24 +149,12 @@ public class MainController implements Initializable {
 	public void gravarVideo() {
 				
 		//JOptionPane.showMessageDialog(null,"teste", "InfoBox: " + valor, JOptionPane.INFORMATION_MESSAGE);
-		prop.setProperty("altura", altura.getText());
-		prop.setProperty("largura", largura.getText());
-		prop.setProperty("x", x.getText());
-		prop.setProperty("y", y.getText());
+		parm.SetParametro("altura", altura.getText());
+		parm.SetParametro("largura", largura.getText());
+		parm.SetParametro("x", x.getText());
+		parm.SetParametro("y", y.getText());
+		parm.salvar();
 		 
-		try {
-			prop.store(new FileOutputStream("application.prop"),"Properties");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
- 
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-		}
-		
 		
 	}
 	
@@ -183,27 +162,24 @@ public class MainController implements Initializable {
 	
 	public void lePropriedades() throws IOException {
 		
-		FileInputStream fi=new FileInputStream("application.prop");
-
-		prop.load(fi);
+		 
+		altura.setText(parm.getParametro("altura"));
+		largura.setText(parm.getParametro("largura"));
+		x.setText(parm.getParametro("x"));
+		y.setText(parm.getParametro("y"));
+		servidorMqtt.setText(parm.getParametro("servidorMqtt"));
+		portaMqtt.setText(parm.getParametro("portaMqtt"));
+		id.setText(parm.getParametro("id"));
 		
-		altura.setText(prop.getProperty("altura"));
-		largura.setText(prop.getProperty("largura"));
-		x.setText(prop.getProperty("x"));
-		y.setText(prop.getProperty("y"));
-		servidorMqtt.setText(prop.getProperty("servidorMqtt"));
-		portaMqtt.setText(prop.getProperty("portaMqtt"));
-		id.setText(prop.getProperty("id"));
+		usuarioMqtt.setText(parm.getParametro("usuarioMqtt"));
+		senhaMqtt.setText(parm.getParametro("senhaMqtt"));
 		
-		usuarioMqtt.setText(prop.getProperty("usuarioMqtt"));
-		senhaMqtt.setText(prop.getProperty("senhaMqtt"));
-		
-		servidorMysql.setText(prop.getProperty("servidorMysql"));
-		usuarioMysql.setText(prop.getProperty("usuarioMysql"));
-		senhaMysql.setText(prop.getProperty("senhaMysql"));
-		portaMysql.setText(prop.getProperty("portaMysql"));
- 		nomePista.setText(prop.getProperty("nomePista"));
- 		urlOrquestrador.setText(prop.getProperty("urlOrquestrador"));
+		servidorMysql.setText(parm.getParametro("servidorMysql"));
+		usuarioMysql.setText(parm.getParametro("usuarioMysql"));
+		senhaMysql.setText(parm.getParametro("senhaMysql"));
+		portaMysql.setText(parm.getParametro("portaMysql"));
+ 		nomePista.setText(parm.getParametro("nomePista"));
+ 		urlOrquestrador.setText(parm.getParametro("urlOrquestrador"));
 		
 		
 	}

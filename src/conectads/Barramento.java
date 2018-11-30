@@ -31,20 +31,21 @@ public class Barramento {
 	public Timer timerAlive = null;
 	public Timer timerAlteraMidiaPadrao = null;
 	public Mysql mysql = null;
-	private Properties prop;
+ 
 	private String v_id, v_nomePista,v_urlOrquestrador;
 	private Modal modal;
 	private log log;
-	
+	private Parametros parm;
 	Barramento() throws Exception {
 		
 		log = new log();
+		 
+		parm = new Parametros();
 		
-		prop = new Properties();
+		
 		inicializaMq();
 		inicializaMysql();
-		incializaVar();
-		ocupaMidia(); // ocupa midia sem passagem	
+ 		ocupaMidia(); // ocupa midia sem passagem	
 	
 		
 	}
@@ -172,23 +173,23 @@ public class Barramento {
 		try {
 					
 				if(placa.length() > 0) {
-					modal.setSite("http://192.168.8.115/post/campanha.php?placa="+ placa);
+					modal.setSite(parm.getParametro("urlOrquestrador") +"?placa="+ placa);
 					System.out.println("Executa-placa: " + placa);
 					log.log("Executa-placa: " + placa);
 				}
 				else if(obuId.length() > 0) {
-					modal.setSite("http://192.168.8.115/post/campanha.php?obuid="+ obuId); 
+					modal.setSite(parm.getParametro("urlOrquestrador") +"?obuid="+ obuId); 
 					System.out.println("Executa-obuId: " + obuId);
 					log.log("Executa-obuId: " + obuId);
 				}
 				else if(aleatorio.equals(true)) { 
-					modal.setSite("http://192.168.8.115/post/campanha.php?aleatorio=true"); 
+					modal.setSite(parm.getParametro("urlOrquestrador") +"?aleatorio=true"); 
 					System.out.println("Executa-aleatorio: S");
 					log.log("Executa-aleatorio: S");
 					
 				}
 				else {
-					modal.setSite("http://192.168.8.115/post/campanha.php");
+					modal.setSite(parm.getParametro("urlOrquestrador"));
 					log.log("Executa-sem-id: " + texto);
 				}
 			
@@ -203,32 +204,7 @@ public class Barramento {
 	
 	
  
-	private void incializaVar() {
-				
-		//InputStream in = getClass().getResourceAsStream("application.prop");
-		FileInputStream fi;
-		try {
-			
-			fi = new FileInputStream("application.prop");
-			prop.load(fi);
-			v_id = prop.getProperty("id");
-	 		v_nomePista = prop.getProperty("nomePista");
-	 		v_urlOrquestrador = prop.getProperty("urlOrquestrador");
-	 		 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			log.log(e.getMessage());
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			 
-			log.log(e.getMessage());
-			
-		}
  
-	}
-	
 	
 	public class clsMq extends Mqtt {
 

@@ -43,6 +43,7 @@ public class Main extends Application {
 	public void resizeScene(double width, double height) {
 	    this.stage.setWidth(1800);
 	    this.stage.setHeight(1200);
+	    
 	}
 	
 	
